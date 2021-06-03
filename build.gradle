@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.10.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'hello'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'   // java 11 버전이랑 맞는거임.
+
+repositories {
+	mavenCentral()  //공개된 여기 사이트에서 받아오라.
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'    // html만드는 템플릿 엔진
+	implementation 'org.springframework.boot:spring-boot-starter-web'          // web
+
+	// db
+	//implementation 'org.springframework.boot:spring-boot-starter-jdbc'	   // jdbc 드라이버 필요
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'     // jpa : jdbc도 포함
+   	runtimeOnly 'com.h2database:h2' 										   // h2 db 클라이언트 필요
+
+	//test
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {  // junit5 자동.
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
